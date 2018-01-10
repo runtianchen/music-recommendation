@@ -1,0 +1,27 @@
+<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<head>
+		<title>Welcome</title>
+	</head>
+
+	<body>
+    {% filter upper %}
+    This text becomes uppercase
+{% endfilter %}
+		<p>你好 {{ username }}  </p>
+		<object height="50" width="100" data="E:\WorkSpace\HBuilderProjects\test\audio\a.mp3"></object>
+        <ul>喜欢的歌曲列表：
+        {% for i in preferences_list %}
+        <li>{{ i }}</li>
+        {% endfor %}
+        </ul>
+        <ul>厌恶的歌曲列表：
+        {% for j in detest_list %}
+        <li>{{ j }}</li>
+            {% else %}
+            <li>NULL</li>
+        {% endfor %}
+        </ul>
+	</body>
+
+</html>
