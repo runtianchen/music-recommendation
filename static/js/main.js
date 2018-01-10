@@ -61,4 +61,18 @@ $(document).ready(function() {
 		tooltip.remove();
 	});
 
+	var isPlaying =false;
+    $(".sailor").live("click",function(){
+        var player = $(this).prev()[0];
+        if (isPlaying)
+	    {
+	    // 如果正在播放, 停止播放并停止读取此音乐文件
+	    	player.pause();
+	    	isPlaying =false;
+	    } else
+	    {
+	    	player.play();
+	    	isPlaying=true;
+	    }
+    });
 });

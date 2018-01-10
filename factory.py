@@ -12,6 +12,7 @@ import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash
+import commitDB
 
 app = Flask(__name__)
 
@@ -27,7 +28,9 @@ def login():
         #     else:
         #         session['logged_in'] = True
         #         flash('You were logged in')
-        return render_template('pineapple.html')
+        _music_list = commitDB.getpreferencesbyname('刘一')
+        print(_music_list)
+        return render_template('pineapple.html', music_list=_music_list)
     return render_template('login.html', error=error)
 
 

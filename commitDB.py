@@ -79,9 +79,9 @@ def getpreferencesbyname(_username):
     conn = init_conn()
     try:
         with conn.cursor() as cursor:
-            sql = 'select users.username, audios.musicname from users inner join preference ' \
-                  'on users.id = preference.userid inner join audios ' \
-                  'on preference.musicid = audios.id where username = %s'
+            sql = 'select users.username,audios.addr,audios.img_addr from users inner join preferences ' \
+                  'on users.id = preferences.userid inner join audios ' \
+                  'on preferences.musicid = audios.id where username = %s'
             cursor.execute(sql, _username)
             # 获取查询结果
             _result = cursor.fetchall()
@@ -92,7 +92,7 @@ def getpreferencesbyname(_username):
     _music_list = []
     if _result:
         for _data in _result:
-            _music_list.append(_data[1])
+            _music_list.append(_data)
     return _music_list
 
 

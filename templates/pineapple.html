@@ -2,7 +2,7 @@
 
 	<head>
 		<title>Magnetic - Stunning Responsive HTML5/CSS3 Photography Wensite Template</title>
-		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta name="author" content="pixelhint.com">
 		<meta name="description" content="Magnetic is a stunning responsive HTML5/CSS3 photography/portfolio website template">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 		<script type="text/javascript" src="../static/js/jquery.js"></script>
 		<script type="text/javascript" src="../static/js/main.js"></script>
+		<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js "></script>
 	</head>
 
 	<body style="">
@@ -67,108 +68,34 @@
 		<!-- end header -->
 
 		<section class="main clearfix">
-			{{ path }}
-			{% for element in listsize %}
-			<p> element </p>
+			{% for element in music_list %}
+			<div class="work">
+				<a>
+					<img src={{"..\static"~element[2]}} class="media" alt="">
+					<div class="caption">
+						<div class="work_title">
+							<audio src={{"..\static"~element[1]}}></audio>
+							<button class='sailor'>bofang</button>
+						</div>
+					</div>
+				</a>
+			</div>
 			{% endfor %}
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/中华民谣.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>图片</h1>
-						</div>
-					</div>
-				</a>
-			</div>
 
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work2.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
+			<!--<div class="work">-->
+				<!--<a>-->
+					<!--<img src="../static/img/work2.jpg" class="media" alt="">-->
+					<!--<div class="caption">-->
+						<!--<div class="work_title">-->
+							<!--<h1><audio id='test1' src="../static/audio/abc.mp3"></audio>-->
+					<!--<button onclick='play();' onclick='play();'>-->
+						<!--bofang-->
+					<!--</button></h1>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</a>-->
+			<!--</div>-->
 
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work3.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work4.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work5.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work6.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work2.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work3.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
-
-			<div class="work">
-				<a href="inner.html">
-					<img src="../static/img/work1.jpg" class="media" alt="">
-					<div class="caption">
-						<div class="work_title">
-							<h1>culpa qui officia deserunt mollit</h1>
-						</div>
-					</div>
-				</a>
-			</div>
 		</section>
 		<!-- end main -->
 

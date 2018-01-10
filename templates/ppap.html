@@ -1,0 +1,24 @@
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Title</title>  
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js ">
+</script>  
+    <script>  
+        $(".test").live("click",function(){	
+            var imgsrc = $(this).prev().attr("id");  
+            alert(imgsrc);  
+        });  
+    </script>  
+</head>  
+<body> 
+	<div id="no">
+		<p id="yes">one</p>
+		<button class="test">1</button>
+	</div>
+	<div>
+		<p id=2>two</p>
+		<button class="test">2</button>
+	</div> 
+</body>  
+</html>  
