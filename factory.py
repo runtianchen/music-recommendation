@@ -15,23 +15,45 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 import commitDB
 
 app = Flask(__name__)
+app.secret_key = '8bca81ae49bdc47625af3fe9769510117dcd6f965c9c1a05'
+
+
+@app.route('/')
+def index():
+    return redirect(url_for('main_interface'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        #     if request.form['username'] != app.config['USERNAME']:
-        #         error = 'Invalid username'
-        #     elif request.form['password'] != app.config['PASSWORD']:
-        #         error = 'Invalid password'
-        #     else:
-        #         session['logged_in'] = True
-        #         flash('You were logged in')
-        _music_list = commitDB.getpreferencesbyname('刘一')
-        print(_music_list)
-        return render_template('pineapple.html', music_list=_music_list)
+        _username = request.form['username']
+        _password = request.form['password']
+        _user = commitDB.select_name(_username)
+        if _user and _user[2] == _password:
+            # flash('You were logged in')
+            session['name'] = _username
+            return redirect(url_for('main_interface'))
+        else:
+            error = '错误的用户名或密码'
     return render_template('login.html', error=error)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('name', None)
+    # flash('You were logged out')
+    return redirect(url_for('login'))
+
+
+@app.route('/interface')
+def main_interface():
+    username = session.get('name')
+    if username:
+        _music_list = commitDB.getpreferencesbyname(username)
+        return render_template('pineapple.html', music_list=_music_list)
+    else:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":

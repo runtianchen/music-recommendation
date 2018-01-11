@@ -42,12 +42,12 @@ def select_all(_db):
 
 
 # 查找用户通过username
-def select_name(_db, _name):
+def select_name(_name=None):
     conn = init_conn()
     try:
         with conn.cursor() as cursor:
             # 执行sql语句，进行查询
-            sql = 'SELECT * FROM %s where username = %s' % (_db, _name)
+            sql = 'SELECT * FROM users where username = "%s"' % _name
             cursor.execute(sql)
             # 获取查询结果
             result = cursor.fetchone()
@@ -55,9 +55,7 @@ def select_name(_db, _name):
         conn.commit()
     finally:
         conn.close()
-    if result:
-        # _user = user.User.data2user(result)
-        return result
+    return result
 
 
 # 添加一个新的用户
@@ -163,4 +161,5 @@ if __name__ == "__main__":
     conn.commit()
     conn.close()
     """
+    print(select_name())
     pass
