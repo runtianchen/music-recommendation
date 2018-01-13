@@ -23,27 +23,43 @@ def index():
     return redirect(url_for('main_interface'))
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
     error = None
     if request.method == 'POST':
         _username = request.form['username']
         _password = request.form['password']
-        _user = commitDB.select_name(_username)
-        if _user and _user[2] == _password:
-            # flash('You were logged in')
+        if _username:
+            _user = commitDB.select_name(_username)
+            if _user and _user[2] == _password:
+                # flash('You were logged in')
+                session['name'] = _username
+                return redirect(url_for('main_interface'))
+            else:
+                error = '错误的用户名或密码'
+        else:
+            return redirect(url_for('signup'))
+    return render_template('signin.html', error=error)
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        _username = request.form['username']
+        _password = request.form['password']
+        if _username and _password:
             session['name'] = _username
             return redirect(url_for('main_interface'))
-        else:
-            error = '错误的用户名或密码'
-    return render_template('login.html', error=error)
+        error = '用户名，密码不能为空'
+    return render_template('signup.html', error=error)
 
 
-@app.route('/logout')
-def logout():
+@app.route('/signout')
+def signout():
     session.pop('name', None)
     # flash('You were logged out')
-    return redirect(url_for('login'))
+    return redirect(url_for('signin'))
 
 
 @app.route('/interface')
@@ -53,7 +69,7 @@ def main_interface():
         _music_list = commitDB.getpreferencesbyname(username)
         return render_template('pineapple.html', music_list=_music_list)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('signin'))
 
 
 if __name__ == "__main__":
