@@ -74,3 +74,8 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+var cur_audio = $('.sailor').attr('id');
+var pre_audio = cur_audio；
+cur_audio = $('');
