@@ -5,17 +5,16 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import load_iris
 import numpy as np
+import dbConn
 
 if __name__ == "__main__":
-    iris = load_iris()
-    # print iris#iris的４个属性是：萼片宽度　萼片长度　花瓣宽度　花瓣长度　标签是花的种类：setosa versicolour virginica
-    print(iris['target'].shape)
+    pre_musics = []
+    pre_target = []
+    for i in dbConn.select_preferences('刘一'):
+        temp = np.load('./static/music-features/' + i.musicname + '.npy')
+        pre_musics.append(temp)
+        pre_target.append(1)
     rf = RandomForestRegressor()  # 这里使用了默认的参数设置
-    rf.fit(iris.data[:150], iris.target[:150])  # 进行模型的训练
-    #
-    # 随机挑选两个预测不相同的样本
-    instance = iris.data[[100, 109]]
-    print(instance)
-    print('instance 0 prediction；', rf.predict(instance[0].reshape((1, -1))))
-    print('instance 1 prediction；', rf.predict(instance[1].reshape((1, -1))))
-    print(iris.target[100], iris.target[109])
+    rf.fit(pre_musics, pre_target)  # 进行模型的训练
+    instance = np.load('./static/music-features/沧海一声笑.npy')
+    print('instance 1 prediction；', rf.predict(instance.reshape((1, -1))))
