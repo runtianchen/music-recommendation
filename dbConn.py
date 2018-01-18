@@ -81,5 +81,5 @@ def select_detests(value):
 
 
 if __name__ == "__main__":
-    print(select_preferences('刘一'))
+    print(select_all('audios'))
     pass

@@ -1,5 +1,4 @@
 import pymysql.cursors
-import user
 import os
 from mutagen import File
 from sqlalchemy import create_engine

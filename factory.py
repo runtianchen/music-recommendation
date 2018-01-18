@@ -13,6 +13,7 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash
 import commitDB
+import dbConn
 
 app = Flask(__name__)
 app.secret_key = '8bca81ae49bdc47625af3fe9769510117dcd6f965c9c1a05'
