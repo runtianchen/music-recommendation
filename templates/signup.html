@@ -11,5 +11,8 @@
         <input style="text" name="password" placeholder="密码"><br>
         <input type="submit" value="提交">
     </form>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
 </body>
 </html>

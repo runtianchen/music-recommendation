@@ -68,6 +68,9 @@
 		<!-- end header -->
 
 		<section class="main clearfix">
+			{% for i in list_audio %}
+			<li><a href=''>{{ i['music_name'] }}</a></li>
+			{% endfor %}
 			{% for element in music_list %}
 			<div class="work">
 				<a>

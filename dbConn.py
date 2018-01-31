@@ -11,13 +11,17 @@ DBSession = sessionmaker(bind=engine)
 
 
 def insert(data_object):
-    session = DBSession()
-    # 添加到session:
-    session.add(data_object)
-    # 提交即保存到数据库:
-    session.commit()
-    # 关闭session:
-    session.close()
+    try:
+        session = DBSession()
+        # 添加到session:
+        session.add(data_object)
+        # 提交即保存到数据库:
+        session.commit()
+        # 关闭session:
+    except Exception as e:
+        print(e)
+    finally:
+        session.close()
 
 
 def delete(table, data_object):

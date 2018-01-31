@@ -32,22 +32,18 @@ class Audio(Base):
     # 表的结构:
     id = Column(Integer, primary_key=True)
     musicname = Column(String(50))
-    singer = Column(String(50))
-    addr = Column(String(50))
-    img_addr = Column(String(50))
-    category = Column(String(50))
+    classification = Column(String(50))
+    path = Column(String(50))
 
-    def __init__(self, musicname, singer=None, addr=None, img_addr=None, category=None, id=None):
+    def __init__(self, musicname, classification=None, path=None):
         self.id = None
         self.musicname = musicname
-        self.singer = singer
-        self.addr = addr
-        self.img_addr = img_addr
-        self.category = category
+        self.classification = classification
+        self.path = path
 
     def __repr__(self):
-        return '<[Audio-%s] musicname : %s, singer : %s, addr : %s, img_addr : %s, category : %s>' % (
-            self.id, self.musicname, self.singer, self.addr, self.img_addr, self.category)
+        return '<[Audio-%s] musicname : %s, classification : %s, path : %s>' % (
+            self.id, self.musicname, self.classification, self.path)
 
 
 class Preference(Base):

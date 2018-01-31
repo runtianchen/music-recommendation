@@ -8,38 +8,36 @@ from mutatest import File
 from dataObject import Audio
 from dbConn import insert
 import features_extraction
+import sqlite3
 
-path = os.path.abspath('.')
+# path = os.path.abspath('.')
+db = sqlite3.connect('database.db')
+sql = 'insert into audios values (null,?,?,?)'
 
 
 def audioputindb(category):
-    file_list = os.listdir("./static/audio/buffer store")
+    _path = r'D:\戏曲\越剧\\'
+    file_list = os.listdir(_path)
     for i in file_list:
-        if os.path.splitext(i)[1] == '.mp3':
-            if os.path.exists('./static/audio/' + i):
-                os.unlink('./static/audio/buffer store/' + i)
-            else:
-                _audio = File('./static/audio/buffer store/' + i)
-                _musicname = _audio.tags['TIT2'].text[0]
-                _singer = None
-                _addr = '/audio/' + i
-                shutil.move('./static/audio/buffer store/' + i, './static/audio')
-                _img_addr = None
-                try:
-                    _singer = _audio.tags['TPE1'].text[0]
-                    _image = _audio.tags['APIC:'].data
-                    _img_name = os.path.splitext(i)[0] + '.jpg'
-                    _img = open('./static/img/' + _img_name, 'wb')
-                    _img.write(_image)
-                    _img.close()
-                    _img_addr = '/img/' + _img_name
-                except KeyError as _:
-                    pass
-                _category = category
-                insert(Audio(_musicname, _singer, _addr, _img_addr, _category))
-                features_extraction.extraction(i)
+        file_type = os.path.splitext(i)[1].lower()
+        if file_type == '.mp3':
+            # if os.path.exists('./static/audio/' + i):
+            #     os.unlink('./static/audio/buffer store/' + i)
+            # else:
+            music_name = os.path.splitext(i)[0]
+            path = '/audio/' + i
+            # shutil.move('./static/audio/buffer store/' + i, './static/audio')
+            # insert(Audio(_musicname, _classification, _path))
+            # features_extraction.extraction(i)
+            cur = db.cursor()
+            try:
+                cur.execute(sql, (music_name, category, path))
+            except sqlite3.IntegrityError as e:
+                print(music_name, e)
+    db.commit()
 
 
 if __name__ == "__main__":
-    audioputindb('秦腔')
+    # audioputindb('越剧')
+    # db.close()
     pass

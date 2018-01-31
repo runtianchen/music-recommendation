@@ -4,17 +4,24 @@
 # ----------------------------------------
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import load_iris
+import os
+import random
 import numpy as np
 import matplotlib.pyplot as plt
-import dbConn
-
+from mySqlite import query_db, SQL_SELECT_AUDIOS
 from scipy import interp
-import os
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import scale
 from sklearn.metrics import roc_curve, auc, accuracy_score, recall_score, precision_score, f1_score
 from sklearn.cross_validation import StratifiedKFold
+
+
+def random_recommend():
+    sql = SQL_SELECT_AUDIOS
+    flag, list_recomm = query_db(sql)
+    return random.sample(list_recomm, k=10)
+
 
 if __name__ == "__main__":
     # pre_musics = []
@@ -104,7 +111,7 @@ if __name__ == "__main__":
         lg.fit(instance_feature[train], instance_label[train])
         predict_test_proba = lg.predict_proba(instance_feature[test])
         predict_test = lg.predict(instance_feature[test])
-        fpr, tpr, thresholds = roc_curve(instance_label[test], predict_test_proba[:,0], pos_label=0)
+        fpr, tpr, thresholds = roc_curve(instance_label[test], predict_test_proba[:, 0], pos_label=0)
         print(instance_label[test])
         print(predict_test)
         print(fpr, tpr)
